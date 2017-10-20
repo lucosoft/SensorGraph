@@ -18,6 +18,8 @@ public class SensorGraph {
 	static SerialPort chosenPort;
 	static int x = 0;
 
+	static byte[] buffer = {'c','o','n','e','c','t','e','d'};
+	
 	public static void main(String[] args) {
 		
 		// create and configure the window
@@ -56,6 +58,7 @@ public class SensorGraph {
 					if(chosenPort.openPort()) {
 						connectButton.setText("Desconectar");
 						portList.setEnabled(false);
+						chosenPort.writeBytes(buffer, buffer.length);
 					}
 					
 					// create a new thread that listens for incoming text and populates the graph
@@ -64,7 +67,7 @@ public class SensorGraph {
 							Scanner scanner = new Scanner(chosenPort.getInputStream());
 							while(scanner.hasNextLine()) {
 								try {
-									String line = scanner.nextLine();
+									String line = scanner.nextLine();									
 									int number = Integer.parseInt(line);
 									series.add(x++, 1023 - number);
 									window.repaint();
