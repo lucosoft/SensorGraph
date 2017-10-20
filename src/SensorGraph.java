@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
@@ -6,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -32,9 +35,13 @@ public class SensorGraph {
 		// create a drop-down box and connect button, then place them at the top of the window
 		JComboBox<String> portList = new JComboBox<String>();
 		JButton connectButton = new JButton("Conectar");
+		JButton enviarButton = new JButton("Enviar");
 		JPanel topPanel = new JPanel();
+		JTextField textField = new JTextField(5);
 		topPanel.add(portList);
 		topPanel.add(connectButton);
+		topPanel.add(textField);
+		topPanel.add(enviarButton);
 		window.add(topPanel, BorderLayout.NORTH);
 		
 		// populate the drop-down box
@@ -48,6 +55,14 @@ public class SensorGraph {
 		JFreeChart chart = ChartFactory.createXYLineChart("Lecturas ADC", "Tiempo (segundos)", "Valores ADC", dataset);
 		window.add(new ChartPanel(chart), BorderLayout.CENTER);
 		
+		// configure the connect button and use another thread to listen for data
+		enviarButton.addActionListener(new ActionListener(){
+			@Override public void actionPerformed(ActionEvent arg0) {
+				
+				chosenPort.writeBytes(textField.getText().getBytes(), textField.getText().length());
+			}
+		});
+
 		// configure the connect button and use another thread to listen for data
 		connectButton.addActionListener(new ActionListener(){
 			@Override public void actionPerformed(ActionEvent arg0) {
