@@ -59,7 +59,8 @@ public class SensorGraph {
 		enviarButton.addActionListener(new ActionListener(){
 			@Override public void actionPerformed(ActionEvent arg0) {
 				
-				chosenPort.writeBytes(textField.getText().getBytes(), textField.getText().length());
+				String textFieldAux = textField.getText()+"\n\r";
+				chosenPort.writeBytes(textFieldAux.getBytes(), textFieldAux.length());
 			}
 		});
 

@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel Guerrero/WorkspaceLPC/SensorGraph/jars/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel Guerrero/WorkspaceLPC/SensorGraph/jars/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel Guerrero/WorkspaceLPC/SensorGraph/jars/jSerialComm-1.3.11.jar" sourcepath="C:/Users/Manuel Guerrero/.m2/repository/com/fazecast/jSerialComm/1.3.11/jSerialComm-1.3.11-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Datos/RepoLocal/SensorGraph/jars/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Datos/RepoLocal/SensorGraph/jars/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Datos/RepoLocal/SensorGraph/jars/jSerialComm-1.3.11.jar" sourcepath="C:/Users/Manuel Guerrero/.m2/repository/com/fazecast/jSerialComm/1.3.11/jSerialComm-1.3.11-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
