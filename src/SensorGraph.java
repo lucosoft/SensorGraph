@@ -27,8 +27,9 @@ public class SensorGraph {
 		
 		// create and configure the window
 		JFrame window = new JFrame();
-		window.setTitle("Grafico ADC");
-		window.setSize(600, 400);
+//		window.setTitle("Grafico ADC");
+//		window.setSize(600, 400);
+		window.setSize(400, 100);
 		window.setLayout(new BorderLayout());
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -50,10 +51,10 @@ public class SensorGraph {
 			portList.addItem(portNames[i].getSystemPortName());
 		
 		// create the line graph
-		XYSeries series = new XYSeries("Lecturas ADC");
-		XYSeriesCollection dataset = new XYSeriesCollection(series);
-		JFreeChart chart = ChartFactory.createXYLineChart("Lecturas ADC", "Tiempo (segundos)", "Valores ADC", dataset);
-		window.add(new ChartPanel(chart), BorderLayout.CENTER);
+//		XYSeries series = new XYSeries("Lecturas ADC");
+//		XYSeriesCollection dataset = new XYSeriesCollection(series);
+//		JFreeChart chart = ChartFactory.createXYLineChart("Lecturas ADC", "Tiempo (segundos)", "Valores ADC", dataset);
+//		window.add(new ChartPanel(chart), BorderLayout.CENTER);
 		
 		// configure the connect button and use another thread to listen for data
 		enviarButton.addActionListener(new ActionListener(){
@@ -71,6 +72,7 @@ public class SensorGraph {
 					// attempt to connect to the serial port
 					chosenPort = SerialPort.getCommPort(portList.getSelectedItem().toString());
 					chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+					boolean isOpenPort = chosenPort.openPort();
 					if(chosenPort.openPort()) {
 						connectButton.setText("Desconectar");
 						portList.setEnabled(false);
@@ -85,8 +87,9 @@ public class SensorGraph {
 								try {
 									String line = scanner.nextLine();									
 									int number = Integer.parseInt(line);
-									series.add(x++, 1023 - number);
-									window.repaint();
+									System.out.println(number);
+//									series.add(x++, 1023 - number);
+//									window.repaint();
 								} catch(Exception e) {}
 							}
 							scanner.close();
@@ -98,8 +101,8 @@ public class SensorGraph {
 					chosenPort.closePort();
 					portList.setEnabled(true);
 					connectButton.setText("Conectar");
-					series.clear();
-					x = 0;
+//					series.clear();
+//					x = 0;
 				}
 			}
 		});
