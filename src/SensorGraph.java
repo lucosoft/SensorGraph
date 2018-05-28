@@ -1,19 +1,14 @@
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import com.fazecast.jSerialComm.SerialPort;
 
 public class SensorGraph {
@@ -27,8 +22,6 @@ public class SensorGraph {
 		
 		// create and configure the window
 		JFrame window = new JFrame();
-//		window.setTitle("Grafico ADC");
-//		window.setSize(600, 400);
 		window.setSize(400, 100);
 		window.setLayout(new BorderLayout());
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,12 +42,6 @@ public class SensorGraph {
 		SerialPort[] portNames = SerialPort.getCommPorts();
 		for(int i = 0; i < portNames.length; i++)
 			portList.addItem(portNames[i].getSystemPortName());
-		
-		// create the line graph
-//		XYSeries series = new XYSeries("Lecturas ADC");
-//		XYSeriesCollection dataset = new XYSeriesCollection(series);
-//		JFreeChart chart = ChartFactory.createXYLineChart("Lecturas ADC", "Tiempo (segundos)", "Valores ADC", dataset);
-//		window.add(new ChartPanel(chart), BorderLayout.CENTER);
 		
 		// configure the connect button and use another thread to listen for data
 		enviarButton.addActionListener(new ActionListener(){
@@ -77,6 +64,8 @@ public class SensorGraph {
 						connectButton.setText("Desconectar");
 						portList.setEnabled(false);
 						chosenPort.writeBytes(buffer, buffer.length);
+						System.out.println(new String(buffer));
+						
 					}
 					
 					// create a new thread that listens for incoming text and populates the graph
@@ -88,8 +77,6 @@ public class SensorGraph {
 									String line = scanner.nextLine();									
 									int number = Integer.parseInt(line);
 									System.out.println(number);
-//									series.add(x++, 1023 - number);
-//									window.repaint();
 								} catch(Exception e) {}
 							}
 							scanner.close();
@@ -101,8 +88,6 @@ public class SensorGraph {
 					chosenPort.closePort();
 					portList.setEnabled(true);
 					connectButton.setText("Conectar");
-//					series.clear();
-//					x = 0;
 				}
 			}
 		});
